@@ -10,11 +10,6 @@ We have generated development libraries for four languages: Java, TypeScript, Py
 
 This guide details the installation and usage of openapi-generator-cli for generating API clients for the LMaaS API, using both Java and Node/NPM approaches. the details can be found here: https://openapi-generator.tech/docs/installation/
 
-Node.js and npm (for Node/NPM client generation):
-
-Download and install Node.js (https://nodejs.org/) from the official website. This will also install npm.
-Installation Methods:
-
 ### 1. Java based OpenAPI generator
 
 **Prerequisites**
@@ -55,8 +50,6 @@ Ensure you have Java 8 or later installed and the java executable is accessible 
 
 
 Download and install Node.js (https://nodejs.org/) from the official website. This will also install npm.
-Installation Methods:
-
 
 - **a. Install openapi-generator-cli**
 
