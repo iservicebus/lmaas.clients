@@ -1,0 +1,153 @@
+openapi: 3.1.0
+info:
+  title: FastAPI
+  version: 0.1.0
+servers:
+- url: /
+paths:
+  /chat/completion:
+    post:
+      operationId: chat_completion_chat_completion_post
+      requestBody:
+        content:
+          application/json:
+            example:
+              text_list:
+                messages:
+                - role: user
+                  content: Not working
+                - role: system
+                  content: Try again?
+            schema:
+              $ref: '#/components/schemas/ChatCompletionReq'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Chat Completion
+      x-content-type: application/json
+      x-accepts: application/json
+components:
+  schemas:
+    ChatCompletionReq:
+      example:
+        top_p: 1.4658129805029452
+        stop: stop
+        text_list:
+          messages:
+          - role: system
+            generated: generated
+            content: ""
+          - role: system
+            generated: generated
+            content: ""
+        max_tokens: 0
+        temperature: 6.027456183070403
+        model: model
+        id: 5ffa5d5b-5faa-4f6b-bf43-5dcecf932269
+        req_time: 2000-01-23T04:56:07.000+00:00
+      properties:
+        max_tokens:
+          nullable: true
+          type: integer
+        temperature:
+          default: 0.2
+          title: Temperature
+          type: number
+        top_p:
+          default: 0.95
+          title: Top P
+          type: number
+        stop:
+          nullable: true
+          type: string
+        model:
+          nullable: true
+          type: string
+        id:
+          default: 5ffa5d5b-5faa-4f6b-bf43-5dcecf932269
+          title: Id
+          type: string
+        req_time:
+          default: 2024-02-18T21:17:20.767221
+          format: date-time
+          title: Req Time
+          type: string
+        text_list:
+          $ref: '#/components/schemas/ChatTextList'
+      required:
+      - text_list
+      title: ChatCompletionReq
+    ChatText:
+      description: Represents a single message in a conversation.
+      example:
+        role: system
+        generated: generated
+        content: ""
+      properties:
+        role:
+          default: system
+          title: Role
+          type: string
+        content: {}
+        generated:
+          title: Generated
+          type: string
+      required:
+      - content
+      title: ChatText
+    ChatTextList:
+      description: Represents a collection of messages in a conversation.
+      example:
+        messages:
+        - role: system
+          generated: generated
+          content: ""
+        - role: system
+          generated: generated
+          content: ""
+      properties:
+        messages:
+          default: []
+          items:
+            $ref: '#/components/schemas/ChatText'
+          type: array
+      title: ChatTextList
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            $ref: '#/components/schemas/ValidationError_loc_inner'
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ValidationError_loc_inner:
+      anyOf:
+      - type: string
+      - type: integer
+
